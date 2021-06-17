@@ -14,10 +14,20 @@ import java.util.Set;
 public class City {
     private String name;
 
+    /**
+     * Name of the district where city is placed
+     */
     private String district;
 
+    /**
+     * Name of the region where district is located. Region is top-level area in the
+     * country
+     */
     private String region;
 
+    /**
+     * Set of transport stations that is linked to this locality
+     */
     private Set<Station> stations;
 
     public City() {
@@ -63,12 +73,12 @@ public class City {
     /**
      * Add specific station to the city station list
      *
-     * @param transportType
-     * @return station
+     * @param station
+     *
      */
     public Station addStation(final TransportType transportType) {
         if (stations == null) {
-            stations = new HashSet<Station>();
+            stations = new HashSet<>();
         }
         Station station = new Station(this, transportType);
         stations.add(station);

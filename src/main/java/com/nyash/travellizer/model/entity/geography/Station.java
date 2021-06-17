@@ -1,5 +1,10 @@
 package com.nyash.travellizer.model.entity.geography;
 
+import com.nyash.travellizer.model.entity.geography.search.criteria.StationCriteria;
+import org.thymeleaf.util.StringUtils;
+
+import java.util.Objects;
+
 /**
  * Station where passengers can get off or take specific kind of transport.
  * Multiple stationts compose route of the trip.
@@ -69,4 +74,27 @@ public class Station {
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
     }
+
+    /**
+     * Verifies if current station matches specified criteria
+     *
+     * @param criteria
+     * @return
+     */
+public boolean match(final StationCriteria criteria){
+    Objects.requireNonNull(criteria,"Station criteria is not initialized");
+
+    if (!StringUtils.isEmpty(criteria.getName())){
+        if (!city.getName().equals(criteria.getName())){
+            return false;
+        }
+    }
+
+    if (criteria.getTransportType(transportType) != null) {
+        if (transportType != criteria.getTransportType(transportType)) {
+            return false;
+        }
+    }
+    return true;
+}
 }
