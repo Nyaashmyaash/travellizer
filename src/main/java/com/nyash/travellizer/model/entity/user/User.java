@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.entity.person;
+package com.nyash.travellizer.model.entity.user;
 
 public class User {
 
