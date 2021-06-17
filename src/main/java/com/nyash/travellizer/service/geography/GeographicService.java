@@ -1,4 +1,4 @@
-package com.nyash.travellizer.service;
+package com.nyash.travellizer.service.geography;
 
 import com.nyash.travellizer.common.model.search.criteria.range.RangeCriteria;
 import com.nyash.travellizer.model.entity.geography.City;
