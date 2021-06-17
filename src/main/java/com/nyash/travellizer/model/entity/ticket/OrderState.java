@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.entity.travel;
+package com.nyash.travellizer.model.entity.ticket;
 
 /**
  * All supported states of the ticket order

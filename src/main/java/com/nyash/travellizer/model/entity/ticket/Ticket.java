@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.entity.travel;
+package com.nyash.travellizer.model.entity.ticket;
 
 public class Ticket {
 

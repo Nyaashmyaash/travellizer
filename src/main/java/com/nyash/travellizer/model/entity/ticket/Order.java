@@ -1,6 +1,7 @@
-package com.nyash.travellizer.model.entity.travel;
+package com.nyash.travellizer.model.entity.ticket;
 
 import com.nyash.travellizer.common.infra.exception.flow.ReservationException;
+import com.nyash.travellizer.model.entity.trip.Trip;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class Order {
     /**
      * Link to the ticket's trip
      */
-//    private Trip trip;
+    private Trip trip;
 
     /**
      * Link to the payed ticket(if order is completed)
@@ -68,9 +69,9 @@ public class Order {
         return dueDate;
     }
 
-//    public Trip getTrip() {
-//        return trip;
-//    }
+    public Trip getTrip() {
+        return trip;
+    }
 
     public Ticket getTicket() {
         return ticket;
