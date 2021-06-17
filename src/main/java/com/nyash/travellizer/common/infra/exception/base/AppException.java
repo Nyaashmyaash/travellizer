@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.infra.exception.base;
+package com.nyash.travellizer.common.infra.exception.base;
 
 public class AppException extends RuntimeException{
 

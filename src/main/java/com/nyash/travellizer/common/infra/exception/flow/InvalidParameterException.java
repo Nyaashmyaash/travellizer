@@ -1,7 +1,7 @@
-package com.nyash.travellizer.model.infra.exception.flow;
+package com.nyash.travellizer.common.infra.exception.flow;
 
 
-import com.nyash.travellizer.model.infra.exception.FlowException;
+import com.nyash.travellizer.common.infra.exception.FlowException;
 
 public class InvalidParameterException extends FlowException {
 

@@ -1,6 +1,6 @@
 package com.nyash.travellizer.model.entity.travel;
 
-import com.nyash.travellizer.model.infra.exception.flow.ReservationException;
+import com.nyash.travellizer.common.infra.exception.flow.ReservationException;
 import lombok.Setter;
 
 import java.time.LocalDateTime;

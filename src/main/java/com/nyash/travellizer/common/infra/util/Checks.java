@@ -1,6 +1,6 @@
-package com.nyash.travellizer.model.infra.util;
+package com.nyash.travellizer.common.infra.util;
 
-import com.nyash.travellizer.model.infra.exception.flow.InvalidParameterException;
+import com.nyash.travellizer.common.infra.exception.flow.InvalidParameterException;
 
 /**
  * Contains common check routines

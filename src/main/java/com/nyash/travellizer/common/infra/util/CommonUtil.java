@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.infra.util;
+package com.nyash.travellizer.common.infra.util;
 
 import java.util.Collections;
 import java.util.List;

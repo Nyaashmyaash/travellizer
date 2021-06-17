@@ -1,6 +1,6 @@
-package com.nyash.travellizer.model.infra.exception;
+package com.nyash.travellizer.common.infra.exception;
 
-import com.nyash.travellizer.model.infra.exception.base.AppException;
+import com.nyash.travellizer.common.infra.exception.base.AppException;
 
 public class FlowException extends AppException {
 

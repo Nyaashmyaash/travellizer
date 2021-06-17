@@ -1,6 +1,6 @@
 package com.nyash.travellizer.model.entity.geography;
 
-import com.nyash.travellizer.model.infra.util.CommonUtil;
+import com.nyash.travellizer.common.infra.util.CommonUtil;
 
 import java.util.HashSet;
 import java.util.Objects;
