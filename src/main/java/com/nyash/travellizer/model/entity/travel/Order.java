@@ -30,7 +30,7 @@ public class Order {
     /**
      * Link to the ticket's trip
      */
-    private Trip trip;
+//    private Trip trip;
 
     /**
      * Link to the payed ticket(if order is completed)
@@ -68,9 +68,9 @@ public class Order {
         return dueDate;
     }
 
-    public Trip getTrip() {
-        return trip;
-    }
+//    public Trip getTrip() {
+//        return trip;
+//    }
 
     public Ticket getTicket() {
         return ticket;

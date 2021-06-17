@@ -1,6 +1,6 @@
 package com.nyash.travellizer.model.entity.geography.search.criteria;
 
-import com.nyash.travellizer.model.entity.transport.TransportType;
+import com.nyash.travellizer.model.entity.geography.TransportType;
 
 import java.util.Objects;
 

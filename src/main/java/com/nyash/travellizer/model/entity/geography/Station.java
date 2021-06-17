@@ -1,7 +1,5 @@
 package com.nyash.travellizer.model.entity.geography;
 
-import com.nyash.travellizer.model.entity.transport.TransportType;
-
 /**
  * Station where passengers can get off or take specific kind of transport.
  * Multiple stationts compose route of the trip.

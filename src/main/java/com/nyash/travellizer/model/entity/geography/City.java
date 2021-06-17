@@ -1,6 +1,5 @@
 package com.nyash.travellizer.model.entity.geography;
 
-import com.nyash.travellizer.model.entity.transport.TransportType;
 import com.nyash.travellizer.model.infra.util.CommonUtil;
 
 import java.util.HashSet;

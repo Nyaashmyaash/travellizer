@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.entity.transport;
+package com.nyash.travellizer.model.entity.geography;
 
 /**
  * Type of the station/transport/vehicle that we support in the application
