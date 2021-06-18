@@ -73,7 +73,7 @@ public class City {
     /**
      * Add specific station to the city station list
      *
-     * @param station
+     *@return  station
      *
      */
     public Station addStation(final TransportType transportType) {
