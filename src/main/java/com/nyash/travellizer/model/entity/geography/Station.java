@@ -10,7 +10,6 @@ import java.util.Objects;
  * Multiple stationts compose route of the trip.
  *
  * @author Nyash
- *
  */
 public class Station {
     private City city;
@@ -30,7 +29,7 @@ public class Station {
     public Station() {
     }
 
-    public Station(final City city,final TransportType transportType) {
+    public Station(final City city, final TransportType transportType) {
         this.city = city;
         this.transportType = transportType;
     }
@@ -81,20 +80,20 @@ public class Station {
      * @param criteria
      * @return
      */
-public boolean match(final StationCriteria criteria){
-    Objects.requireNonNull(criteria,"Station criteria is not initialized");
+    public boolean match(final StationCriteria criteria) {
+        Objects.requireNonNull(criteria, "Station criteria is not initialized");
 
-    if (!StringUtils.isEmpty(criteria.getName())){
-        if (!city.getName().equals(criteria.getName())){
-            return false;
+        if (!StringUtils.isEmpty(criteria.getName())) {
+            if (!city.getName().equals(criteria.getName())) {
+                return false;
+            }
         }
-    }
 
-    if (criteria.getTransportType(transportType) != null) {
-        if (transportType != criteria.getTransportType(transportType)) {
-            return false;
+        if (criteria.getTransportType(transportType) != null) {
+            if (transportType != criteria.getTransportType(transportType)) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
-}
 }
