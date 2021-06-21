@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Route that links stations using any kind of transport (bus, train, avia)
+ * Route that links stations using any kind of transport (bus, train, air, water)
  *
  * @author Nyash
  */
@@ -43,6 +43,9 @@ public class Route {
      * Set of trips for the specified route
      */
     private Set<Trip> trips;
+
+    public Route() {
+    }
 
     public String getStart() {
         return start;
