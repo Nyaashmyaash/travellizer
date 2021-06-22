@@ -1,8 +1,10 @@
 package com.nyash.travellizer.model.entity.base;
 
 import com.nyash.travellizer.model.entity.user.User;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 /**
@@ -10,8 +12,10 @@ import java.time.LocalDateTime;
  *
  * @author Nyash
  */
+@MappedSuperclass
 @Setter
-public class AbstractEntity {
+@EqualsAndHashCode(of="id")
+public abstract class AbstractEntity {
 
     /**
      * Unique entity identifier
@@ -31,12 +35,12 @@ public class AbstractEntity {
     /**
      * Person who created specific entity
      */
-    private User createdBy;
+    private String createdBy;
 
     /**
      * Last person who modified entity
      */
-    private User modifiedBy;
+    private String modifiedBy;
 
     public int getId() {
         return id;
@@ -50,11 +54,11 @@ public class AbstractEntity {
         return modifiedAt;
     }
 
-    public User getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public User getModifiedBy() {
+    public String getModifiedBy() {
         return modifiedBy;
     }
 }

@@ -1,5 +1,6 @@
 package com.nyash.travellizer.model.entity.trip;
 
+import com.nyash.travellizer.model.entity.base.AbstractEntity;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.time.LocalTime;
  *
  */
 @Setter
-public class Trip {
+public class Trip extends AbstractEntity {
 
     /**
      * Route of the trip

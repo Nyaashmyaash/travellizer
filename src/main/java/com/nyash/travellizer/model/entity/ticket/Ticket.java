@@ -2,6 +2,7 @@ package com.nyash.travellizer.model.entity.ticket;
 
 import com.nyash.travellizer.common.generator.text.StringGenerator;
 import com.nyash.travellizer.common.infra.util.Checks;
+import com.nyash.travellizer.model.entity.base.AbstractEntity;
 import lombok.Setter;
 
 /**
@@ -10,7 +11,7 @@ import lombok.Setter;
  * @author Nyash
  */
 @Setter
-public class Ticket {
+public class Ticket extends AbstractEntity {
 
     /**
      * Size of the generated ticket number
