@@ -1,4 +1,4 @@
-package com.nyash.travellizer.model.entity;
+package com.nyash.travellizer.model.entity.geography;
 
 import com.nyash.travellizer.model.entity.geography.City;
 import com.nyash.travellizer.model.entity.geography.Station;
