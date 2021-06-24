@@ -10,6 +10,7 @@ import com.nyash.travellizer.persistence.ticket.TicketRepository;
 import com.nyash.travellizer.service.ticket.impl.TicketServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
@@ -44,6 +45,12 @@ public class TicketServiceImplTest {
         verify(orderRepository, times(1)).save(order);
     }
 
+    @Test
+    public void cancelReservation_invalidId_orderNotCancelled() {
+        when(orderRepository.findById(1)).thenReturn(Optional.empty());
+        ticketService.cancelReservation(1, "test");
 
+        verify(orderRepository, never()).save(ArgumentMatchers.any(Order.class));
+    }
 
 }
