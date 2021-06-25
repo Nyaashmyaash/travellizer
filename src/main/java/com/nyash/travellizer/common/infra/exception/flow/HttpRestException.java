@@ -1,6 +1,6 @@
 package com.nyash.travellizer.common.infra.exception.flow;
 
-import com.nyash.travellizer.common.infra.exception.FlowException;
+import com.nyash.travellizer.common.infra.exception.base.AppException;
 
 /**
  * Invoked when web server returns error status code (4xx-5xx)
@@ -8,7 +8,7 @@ import com.nyash.travellizer.common.infra.exception.FlowException;
  * @author Nyash
  *
  */
-public class HttpRestException extends FlowException {
+public class HttpRestException extends AppException {
 
     private static final long serialVersionUID = -6408338683345172869L;
 

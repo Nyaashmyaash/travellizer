@@ -1,6 +1,6 @@
 package com.nyash.travellizer.common.infra.exception.flow;
 
-import com.nyash.travellizer.common.infra.exception.FlowException;
+import com.nyash.travellizer.common.infra.exception.base.AppException;
 
 /**
  * {@link ValidationException} is raised when attribute values of the object
@@ -9,7 +9,7 @@ import com.nyash.travellizer.common.infra.exception.FlowException;
  * @author Nyash
  *
  */
-public class ValidationException extends FlowException {
+public class ValidationException extends AppException {
     private static final long serialVersionUID = 6858621613562789296L;
 
     public ValidationException(String message, Throwable cause) {
