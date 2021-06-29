@@ -1,5 +1,11 @@
 package com.nyash.travellizer.common.model.transform.mapper;
 
+/**
+ * Mapper-stub that checks equality of source/destination field types
+ * and returns source values
+ * @author Nyash
+ *
+ */
 public class StandardMapper implements Mapper<Object, Object>{
     @Override
     public boolean supports(Class<Object> sourceType, Class<Object> destinationType) {
