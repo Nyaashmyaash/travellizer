@@ -12,8 +12,8 @@ public interface TripService {
     /**
      * Returns list of existing routes between these two stations
      *
-     * @param end
      * @param start
+     * @param destination
      * @return
      */
     List<Route> findRoutes(String start, String destination);
