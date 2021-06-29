@@ -9,6 +9,7 @@ import java.util.Objects;
  *
  */
 public class StringToEnumMapper implements Mapper<String, Enum>{
+
     @Override
     public boolean supports(Class<String> sourceType, Class<Enum> destinationType) {
         return sourceType.equals(String.class) && Objects.equals(destinationType.getSuperclass(), Enum.class);

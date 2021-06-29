@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 
 public class EnumToStringMapper implements Mapper<Enum<?>, String>{
+
     @Override
     public boolean supports(Class<Enum<?>> sourceType, Class<String> destinationType) {
         return Objects.equals(sourceType.getSuperclass(), Enum.class) && destinationType.equals(String.class);
