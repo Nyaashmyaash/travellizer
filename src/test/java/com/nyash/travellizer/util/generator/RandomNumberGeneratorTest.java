@@ -1,4 +1,4 @@
-package com.nyash.travellizer.util;
+package com.nyash.travellizer.util.generator;
 
 import com.nyash.travellizer.common.generator.NumberGenerator;
 import com.nyash.travellizer.common.generator.RandomNumberGenerator;
