@@ -3,6 +3,7 @@ package com.nyash.travellizer.common.infra.util;
 import com.nyash.travellizer.common.infra.exception.ConfigurationException;
 import com.nyash.travellizer.common.infra.util.annotations.Ignore;
 import com.nyash.travellizer.common.model.transform.mapper.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
  * Contains reflection-related utility operations
  *
  * @author Nyash
- *
  */
 public class ReflectionUtil {
     private static final List<Mapper> MAPPERS;
@@ -26,7 +26,7 @@ public class ReflectionUtil {
                 new StringToUuidMapper(), new UuidToStringMapper());
     }
 
-    private ReflectionUtil(){
+    private ReflectionUtil() {
     }
 
     /**
@@ -52,7 +52,7 @@ public class ReflectionUtil {
      * @param clz2
      * @return
      */
-    public static List<String> findSimilarFields(Class<?> clz1, Class<?> clz2) throws  ConfigurationException {
+    public static List<String> findSimilarFields(Class<?> clz1, Class<?> clz2) throws ConfigurationException {
         try {
             Predicate<Field> ignoreAbsent = field -> !field.isAnnotationPresent(Ignore.class);
             List<String> targetFields = getFields(clz2, List.of(ignoreAbsent));
@@ -79,9 +79,7 @@ public class ReflectionUtil {
             fields.addAll(Arrays.asList(current.getDeclaredFields()));
             current = current.getSuperclass();
         }
-
         return fields;
-
     }
 
     /**
@@ -100,7 +98,6 @@ public class ReflectionUtil {
                     .filter(field -> filters.stream().allMatch(p -> p.test(field))).collect(Collectors.toList()));
             current = current.getSuperclass();
         }
-
         return fields.stream().map(Field::getName).collect(Collectors.toList());
     }
 
@@ -111,4 +108,93 @@ public class ReflectionUtil {
      * @param dest
      * @param fields
      */
+    public static void copyFields(final Object src, final Object dest, final List<String> fields)
+            throws ConfigurationException {
+        Checks.checkParameter(src != null, "Source object is not initialized");
+        Checks.checkParameter(dest != null, "Destination object is not initialized");
+        try {
+            for (String field : fields) {
+                Field sourceField = getField(src.getClass(), field);
+                Field destField = getField(dest.getClass(), field);
+                // Skip unknown fields
+                if (sourceField != null && destField != null) {
+                    Object value = convert(sourceField, destField, src);
+
+                    setFieldValue(dest, field, value);
+                }
+            }
+        } catch (SecurityException | ReflectiveOperationException | IllegalArgumentException ex) {
+            throw new ConfigurationException(ex);
+        }
+    }
+
+    /**
+     * Converts value of source field using corresponding mapper
+     * @param sourceField
+     * @param destField
+     * @param src
+     * @return
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     */
+    private static Object convert() {
+
+    }
+
+    /**
+     * Returns class field by its name. This method supports base classes as well
+     *
+     * @param clz
+     * @param name
+     * @return
+     */
+    public static <T> Field getField(final Class<T> clz, final String name) {
+        Class<?> current = clz;
+        while (current != null) {
+            try {
+                return current.getDeclaredField(name);
+            } catch (NoSuchFieldException | SecurityException e) {
+                current = current.getSuperclass();
+            }
+        }
+        throw  new ConfigurationException("No field " + name + " in the class " + clz);
+    }
+
+    /**
+     * Returns value of the specified field of the object
+     *
+     * @param src
+     * @param name
+     */
+    public static Object getFieldValue(final Object src, final String name) throws  ConfigurationException {
+        Checks.checkParameter(src != null, "Source object is not initialized");
+        Checks.checkParameter(!StringUtils.isEmpty(name), "Field name is not initialized");
+        try {
+            Field field = getField(src.getClass(), name);
+            field.setAccessible(true);
+            return field.get(src);
+        } catch (SecurityException | ReflectiveOperationException | IllegalArgumentException ex) {
+            throw new ConfigurationException(ex);
+        }
+    }
+
+    /**
+     * Changes value of the specified field of the object
+     *
+     * @param src
+     * @param name
+     * @param value
+     */
+    public static void setFieldValue(final Object src, final String name, final Object value)
+            throws ConfigurationException {
+        Checks.checkParameter(src != null, "Source object is not initialized");
+        Checks.checkParameter(!StringUtils.isEmpty(name), "Field name is not initialized");
+        try {
+            Field fld =getField(src.getClass(),name);
+            fld.setAccessible(true);
+            fld.set(src, value);
+        } catch (SecurityException | ReflectiveOperationException |IllegalArgumentException ex) {
+            throw new ConfigurationException(ex);
+        }
+    }
 }
