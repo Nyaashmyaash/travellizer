@@ -1,6 +1,7 @@
 package com.nyash.travellizer.common.model.transform;
 
 import com.nyash.travellizer.common.infra.util.Checks;
+import com.nyash.travellizer.common.infra.util.ReflectionUtil;
 
 import java.util.List;
 
@@ -21,7 +22,12 @@ public interface Transformer {
      * @param clz
      * @return
      */
-    default <T,P> List<P> transform(List<T> entities, Class<P> clz) {
+    default <T,P> List<P> transform(List<T> entitiy, Class<P> clz) {
+        checkParams(entitiy, clz);
+
+        P dest = ReflectionUtil.createInstance(clz);
+
+        return transform(entitiy, dest);
     }
 
     private void checkParams(final Object param, final Class<?> clz){
