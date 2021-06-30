@@ -137,8 +137,15 @@ public class ReflectionUtil {
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
      */
-    private static Object convert() {
+    private static Object convert(Field sourceField, Field destField, Object src)
+            throws IllegalArgumentException, ReflectiveOperationException {
+        Mapper currentMapper = MAPPERS.stream()
+                .filter(mapper -> mapper.supports(sourceField.getType(), destField.getType())).findAny()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "No mapper for field types: " + sourceField.getType() + " to " + destField.getType()));
 
+        sourceField.setAccessible(true);
+        return currentMapper.map(sourceField.get(src), destField.getType());
     }
 
     /**
