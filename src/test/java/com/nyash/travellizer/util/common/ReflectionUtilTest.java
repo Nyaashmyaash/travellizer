@@ -86,6 +86,13 @@ public class ReflectionUtilTest {
         List<String> fields = ReflectionUtil.getFields(Source.class, List.of());
         assertEquals(6,fields.size());
     }
+
+    @Test
+    void getFieldValue_validFieldName_valueReturned() {
+        Source source = new Source();
+        int value = (int) ReflectionUtil.getFieldValue(source, "ignored");
+        assertEquals(2, value);
+    }
 }
 
 class BaseSource {
