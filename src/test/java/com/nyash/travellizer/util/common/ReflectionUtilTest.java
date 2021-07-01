@@ -22,7 +22,7 @@ public class ReflectionUtilTest {
 
     @Test
     void createInstanceSuccess() {
-        Object value = ReflectionUtil.createInstance(Destination.class);
+        Object value = ReflectionUtil.createInstance(Source.class);
         assertNotNull(value);
     }
 
