@@ -59,6 +59,12 @@ public class ReflectionUtilTest {
         assertFalse(fields.contains("finalField"));
     }
 
+    @Test
+    void copyFindSimilarFieldsForBaseFieldSuccess() {
+        List<String> fields = ReflectionUtil.findSimilarFields(Source.class, Destination.class);
+        assertTrue(fields.contains("baseField"));
+    }
+
 }
 
 class BaseSource {
