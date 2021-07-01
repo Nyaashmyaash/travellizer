@@ -49,6 +49,14 @@ public class ReflectionUtilTest {
     @Test
     void copyFindSimilarFieldsWithIgnoreSuccess() {
         List<String> fields = ReflectionUtil.findSimilarFields(Source.class, Destination.class);
+        assertFalse(fields.contains("ignored"));
+    }
+
+    @Test
+    void copyFindSimilarFieldsForStaticAndFinalSuccess() {
+        List<String> fields = ReflectionUtil.findSimilarFields(Source.class, Destination.class);
+        assertFalse(fields.contains("staticField"));
+        assertFalse(fields.contains("finalField"));
     }
 
 }
