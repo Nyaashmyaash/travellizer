@@ -7,6 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Verifies functionality of {@link Checks} class
+ *
+ * @author Nyash
+ *
+ */
 public class ChecksTest {
 
     @Test
