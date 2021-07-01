@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class ReflectionUtilTest {
 
-    @Test
-    void createInstanceSuccess() {
-        Object value = ReflectionUtil.createInstance(Source.class);
-        assertNotNull(value);
-    }
+//    @Test
+//    void createInstanceSuccess() {
+//        Object value = ReflectionUtil.createInstance(Source.class);
+//        assertNotNull(value);
+//    }
 
     @Test
     void testCreateInstanceFailure() {
