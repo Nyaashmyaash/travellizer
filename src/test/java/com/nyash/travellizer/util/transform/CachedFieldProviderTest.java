@@ -33,6 +33,9 @@ public class CachedFieldProviderTest {
     @Test
     void testGetFieldNamesCachedSuccess() {
         List<String> fields = provider.getFieldNames(Source.class, Destination.class);
+        List<String> fields2 = provider.getFieldNames(Source.class, Destination.class);
+        assertFalse(fields.isEmpty());
+        assertEquals(fields, fields2);
 
     }
 
