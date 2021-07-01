@@ -1,6 +1,7 @@
 package com.nyash.travellizer.util.common;
 
 import com.nyash.travellizer.common.infra.exception.ConfigurationException;
+import com.nyash.travellizer.common.infra.exception.flow.InvalidParameterException;
 import com.nyash.travellizer.common.infra.util.ReflectionUtil;
 import com.nyash.travellizer.common.infra.util.annotations.Ignore;
 
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,6 +67,12 @@ public class ReflectionUtilTest {
         assertTrue(fields.contains("baseField"));
     }
 
+    @Test
+    void copyFieldsDestinationNullFailure() {
+        Source src = new Source();
+        assertThrows(InvalidParameterException.class,
+                () -> ReflectionUtil.copyFields(src, null, Collections.emptyList()));
+    }
 }
 
 class BaseSource {
