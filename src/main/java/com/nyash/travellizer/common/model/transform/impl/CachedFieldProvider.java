@@ -1,5 +1,8 @@
 package com.nyash.travellizer.common.model.transform.impl;
 
+import com.nyash.travellizer.common.infra.util.ReflectionUtil;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,5 +24,30 @@ public class CachedFieldProvider extends FieldProvider {
     public CachedFieldProvider() {
         cache = new ConcurrentHashMap<>();
         domainFields = new ConcurrentHashMap<>();
+    }
+
+    /**
+     * Returns list of similar field names for source/destination classes
+     *
+     * @param source
+     * @param dest
+     * @return
+     */
+    @Override
+    public List<String> getFieldNames(Class<?> source, Class<?> dest) {
+        String key = source.getSimpleName() + dest.getSimpleName();
+        return cache.computeIfAbsent(key, item -> ReflectionUtil.findSimilarFields(source, dest));
+    }
+
+    @Override
+    public List<String> getDomainProperties(Class<?> clz) {
+        String key = clz.getSimpleName();
+        return domainFields.computeIfAbsent(key, item -> super.getDomainProperties(clz));
+    }
+
+    @Override
+    public List<String> getFieldNames(Class<?> source, Class<?> dest, List<Field> ignoredFields) {
+        String key = source.getSimpleName() + dest.getSimpleName();
+        return cache.computeIfAbsent(key, item -> ReflectionUtil.findSimilarFields(source, dest, ignoredFields));
     }
 }
