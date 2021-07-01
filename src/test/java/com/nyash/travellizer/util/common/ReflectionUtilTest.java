@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class ReflectionUtilTest {
 
-//    @Test
-//    void createInstanceSuccess() {
-//        Object value = ReflectionUtil.createInstance(Source.class);
-//        assertNotNull(value);
-//    }
+    @Test
+    void createInstanceSuccess() {
+        Object value = ReflectionUtil.createInstance(Source.class);
+        assertNotNull(value);
+    }
 
     @Test
     void testCreateInstanceFailure() {
@@ -92,6 +92,21 @@ public class ReflectionUtilTest {
         Source source = new Source();
         int value = (int) ReflectionUtil.getFieldValue(source, "ignored");
         assertEquals(2, value);
+    }
+
+    @Test
+    void getFieldValue_invalidFieldName_exceptionThrown() {
+        Source source = new Source();
+        assertThrows(ConfigurationException.class, () -> ReflectionUtil.getFieldValue(source, "invalidname"));
+    }
+
+    @Test
+    void setFieldValue_validFieldNameAndValue_valueChanged() {
+        Source source = new Source();
+        int newValue = 10;
+        ReflectionUtil.setFieldValue(source, "ignored", newValue);
+        int value = (int) ReflectionUtil.getFieldValue(source,"ignored");
+        assertEquals(newValue, value);
     }
 }
 
