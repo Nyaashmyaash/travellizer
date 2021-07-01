@@ -73,6 +73,19 @@ public class ReflectionUtilTest {
         assertThrows(InvalidParameterException.class,
                 () -> ReflectionUtil.copyFields(src, null, Collections.emptyList()));
     }
+
+    @Test
+    void getFieldsWithFilters_IgnoreFilter_1fieldReturned() {
+        List<String> fields = ReflectionUtil.getFields(Source.class,
+                List.of(field -> field.isAnnotationPresent(Ignore.class)));
+        assertEquals(1, fields.size());
+    }
+
+    @Test
+    void getFieldsWithFilters_NoFilters_allFieldsReturned() {
+        List<String> fields = ReflectionUtil.getFields(Source.class, List.of());
+        assertEquals(6,fields.size());
+    }
 }
 
 class BaseSource {
