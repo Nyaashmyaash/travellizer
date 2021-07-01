@@ -8,6 +8,7 @@ import com.nyash.travellizer.common.infra.util.annotations.Ignore;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.lang.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ReflectionUtilTest {
 
     @Test
     void createInstanceSuccess() {
-        Object value = ReflectionUtil.createInstance(Source.class);
+        Object value = ReflectionUtil.createInstance(Destination.class);
         assertNotNull(value);
     }
 

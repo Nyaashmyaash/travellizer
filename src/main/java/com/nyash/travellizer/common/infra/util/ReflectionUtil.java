@@ -40,8 +40,8 @@ public class ReflectionUtil {
     public static <T> T createInstance(Class<T> clz) throws ConfigurationException {
         try {
             return clz.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new ConfigurationException(e);
+        } catch (Exception ex) {
+            throw new ConfigurationException(ex);
         }
     }
 
