@@ -22,8 +22,8 @@ public class ReflectionUtil {
     private static final List<Mapper> MAPPERS;
 
     static {
-        MAPPERS = List.of(new EnumToStringMapper(), new StringToEnumMapper(),
-                new StringToUuidMapper(), new UuidToStringMapper());
+        MAPPERS = List.of(new EnumToStringMapper(), new UuidToStringMapper(), new StringToEnumMapper(),
+                new StringToUuidMapper(), new StandardMapper());
     }
 
     private ReflectionUtil() {
@@ -65,6 +65,20 @@ public class ReflectionUtil {
         }
     }
 
+    public static List<String> findSimilarFields(Class<?> clz1, Class<?> clz2, List<Field> ignoredFields)
+            throws ConfigurationException {
+        try {
+            Predicate<Field> ignoreAbsent = field -> !ignoredFields.contains(field);
+            List<String> targetFields = getFields(clz2, List.of(ignoreAbsent));
+
+            return getFields(clz1, List.of(ignoreAbsent,
+                    field -> !Modifier.isStatic(field.getModifiers()) && !Modifier.isFinal(field.getModifiers()),
+                    field -> targetFields.contains(field.getName())));
+        } catch (SecurityException ex) {
+            throw new ConfigurationException(ex);
+        }
+    }
+
     /***
      * Returns all declared fields of the specified classes and all superclasses
      *
@@ -79,6 +93,7 @@ public class ReflectionUtil {
             fields.addAll(Arrays.asList(current.getDeclaredFields()));
             current = current.getSuperclass();
         }
+
         return fields;
     }
 
@@ -98,6 +113,7 @@ public class ReflectionUtil {
                     .filter(field -> filters.stream().allMatch(p -> p.test(field))).collect(Collectors.toList()));
             current = current.getSuperclass();
         }
+
         return fields.stream().map(Field::getName).collect(Collectors.toList());
     }
 
@@ -164,7 +180,7 @@ public class ReflectionUtil {
                 current = current.getSuperclass();
             }
         }
-        throw  new ConfigurationException("No field " + name + " in the class " + clz);
+        throw new ConfigurationException("No field " + name + " in the class " + clz);
     }
 
     /**
@@ -173,13 +189,13 @@ public class ReflectionUtil {
      * @param src
      * @param name
      */
-    public static Object getFieldValue(final Object src, final String name) throws  ConfigurationException {
+    public static Object getFieldValue(final Object src, final String name) throws ConfigurationException {
         Checks.checkParameter(src != null, "Source object is not initialized");
         Checks.checkParameter(!StringUtils.isEmpty(name), "Field name is not initialized");
         try {
-            Field field = getField(src.getClass(), name);
-            field.setAccessible(true);
-            return field.get(src);
+            Field fld = getField(src.getClass(), name);
+            fld.setAccessible(true);
+            return fld.get(src);
         } catch (SecurityException | ReflectiveOperationException | IllegalArgumentException ex) {
             throw new ConfigurationException(ex);
         }
@@ -197,11 +213,12 @@ public class ReflectionUtil {
         Checks.checkParameter(src != null, "Source object is not initialized");
         Checks.checkParameter(!StringUtils.isEmpty(name), "Field name is not initialized");
         try {
-            Field fld =getField(src.getClass(),name);
+            Field fld = getField(src.getClass(), name);
             fld.setAccessible(true);
             fld.set(src, value);
-        } catch (SecurityException | ReflectiveOperationException |IllegalArgumentException ex) {
+        } catch (SecurityException | ReflectiveOperationException | IllegalArgumentException ex) {
             throw new ConfigurationException(ex);
         }
     }
+
 }

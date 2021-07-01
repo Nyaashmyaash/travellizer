@@ -1,28 +1,60 @@
 package com.nyash.travellizer.util.common;
 
+import com.nyash.travellizer.common.infra.exception.ConfigurationException;
 import com.nyash.travellizer.common.infra.util.ReflectionUtil;
 import com.nyash.travellizer.common.infra.util.annotations.Ignore;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 /**
  * Verifies functionality of the {@link ReflectionUtil} unit
  *
  * @author Nyash
- *
  */
 public class ReflectionUtilTest {
 
+//    @Test
+//    void createInstanceSuccess() {
+//        Object value = ReflectionUtil.createInstance(Source.class);
+//        assertNotNull(value);
+//    }
+
     @Test
-    void createInstanceSuccess() {
-        Object value = ReflectionUtil.createInstance(Source.class);
-        assertNotNull(value);
+    void testCreateInstanceFailure() {
+        assertThrows(ConfigurationException.class, () -> ReflectionUtil.createInstance(Restricted.class));
+    }
+
+    @Test
+    void testFindSimilarFieldsSuccess() {
+        List<String> fields = ReflectionUtil.findSimilarFields(Source.class, Destination.class);
+        assertNotNull(fields);
+        assertTrue(fields.contains("value"));
+    }
+
+    @Test
+    void testCopyFieldsSuccess() {
+        Source src = new Source();
+        src.setValue(10);
+        Destination dest = new Destination();
+        List<String> fields = ReflectionUtil.findSimilarFields(src.getClass(), dest.getClass());
+
+        ReflectionUtil.copyFields(src, dest, fields);
+        assertEquals(dest.getValue(), 10);
+    }
+
+    @Test
+    void copyFindSimilarFieldsWithIgnoreSuccess() {
+        List<String> fields = ReflectionUtil.findSimilarFields(Source.class, Destination.class);
     }
 
 }
 
 class BaseSource {
-    private int BaseField;
+    private int baseField;
 }
 
 class BaseDestination {
@@ -62,5 +94,6 @@ class Destination extends BaseDestination {
 
 class Restricted {
     public Restricted(int value) {
+
     }
 }
