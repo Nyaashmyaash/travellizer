@@ -1,6 +1,9 @@
 package com.nyash.travellizer.util.common;
 
+import com.nyash.travellizer.common.infra.util.ReflectionUtil;
 import com.nyash.travellizer.common.infra.util.annotations.Ignore;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Verifies functionality of the {@link ReflectionUtil} unit
@@ -10,6 +13,11 @@ import com.nyash.travellizer.common.infra.util.annotations.Ignore;
  */
 public class ReflectionUtilTest {
 
+    @Test
+    void createInstanceSuccess() {
+        Object value = ReflectionUtil.createInstance(Source.class);
+        assertNotNull(value);
+    }
 
 }
 
@@ -18,7 +26,7 @@ class BaseSource {
 }
 
 class BaseDestination {
-    private int BaseField;
+    private int baseField;
 }
 
 class Source extends BaseSource {
@@ -31,7 +39,7 @@ class Source extends BaseSource {
 
     private static int staticField;
 
-    private final int finalfield = 0;
+    private final int finalField = 0;
 
     public void setValue(int value) {
         this.value = value;
