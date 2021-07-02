@@ -1,5 +1,7 @@
 package com.nyash.travellizer.util.transform;
 
+import com.nyash.travellizer.common.model.transform.Transformable;
+import com.nyash.travellizer.common.model.transform.TransformableProvider;
 import com.nyash.travellizer.common.model.transform.Transformer;
 import com.nyash.travellizer.common.model.transform.impl.CachedFieldProvider;
 import com.nyash.travellizer.common.model.transform.impl.SimpleDTOTransformer;
@@ -7,6 +9,7 @@ import com.nyash.travellizer.model.entity.base.AbstractEntity;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.DayOfWeek;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -41,5 +44,13 @@ public class SimpleDTOTransformerTest {
 
         String id;
 
+    }
+
+    private static class StubTransformableProvider implements TransformableProvider {
+
+        @Override
+        public <T, P> Optional<Transformable<T, P>> find(Class<T> classT) {
+            return Optional.empty();
+        }
     }
 }
