@@ -36,7 +36,11 @@ public class CachedFieldProviderTest {
         List<String> fields2 = provider.getFieldNames(Source.class, Destination.class);
         assertFalse(fields.isEmpty());
         assertEquals(fields, fields2);
+    }
 
+    @Test
+    void getDomainProperties_singleFieldAnnotation_oneFieldReturned() {
+        List<String> fields =provider.getDomainProperties(DTO)
     }
 
     class Source {
