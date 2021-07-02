@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Verifies functionality of the {@link SimpleDTOTransformer} unit
  *
- * @author Morenets
+ * @author Nyash
  */
 public class SimpleDTOTransformerTest {
     private Transformer transformer;
