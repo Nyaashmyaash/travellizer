@@ -42,7 +42,7 @@ public class SimpleDTOTransformerTest {
         assertEquals(source.value, destination.value);
         assertEquals(source.text, destination.text);
         assertEquals(FRIDAY.name(), destination.day);
-        assertEquals(source.id, destination.id);
+        assertEquals(source.id.toString(), destination.id);
     }
 
     public static class Source extends AbstractEntity {
