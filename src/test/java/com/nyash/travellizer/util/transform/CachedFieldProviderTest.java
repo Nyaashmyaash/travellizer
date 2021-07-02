@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
  * @author Nyash
  */
 public class CachedFieldProviderTest {
+
     private FieldProvider provider;
 
     @BeforeEach
@@ -62,7 +63,6 @@ public class CachedFieldProviderTest {
         assertFalse(fields.isEmpty());
         assertEquals(fields, fields2);
     }
-
     class Source {
         int value;
     }
