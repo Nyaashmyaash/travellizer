@@ -53,4 +53,25 @@ public class SimpleDTOTransformerTest {
             return Optional.empty();
         }
     }
+
+    private static class DestinationTransformable implements Transformable<Source, Destination> {
+        @Override
+        public Destination transform(Source source, Destination dest) {
+            dest.text = "changed";
+            return dest;
+        }
+    }
+
+    private static class CustomTransformableProvider implements TransformableProvider {
+
+        private final DestinationTransformable transformable = new DestinationTransformable();
+
+        @Override
+        public <T, P> Optional<Transformable<T, P>> find(Class<T> classT) {
+            if (classT == Source.class) {
+                return (Optional) Optional.of(transformable);
+            }
+            return Optional.empty();
+        }
+    }
 }
