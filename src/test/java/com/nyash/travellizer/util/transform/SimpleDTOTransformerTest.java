@@ -13,7 +13,6 @@ import java.util.UUID;
  * Verifies functionality of the {@link SimpleDTOTransformer} unit
  *
  * @author Morenets
- *
  */
 public class SimpleDTOTransformerTest {
     private Transformer transformer;
@@ -31,5 +30,16 @@ public class SimpleDTOTransformerTest {
         DayOfWeek day;
 
         UUID id;
+    }
+
+    public static class Destination {
+        int value;
+
+        String text;
+
+        String day;
+
+        String id;
+
     }
 }
