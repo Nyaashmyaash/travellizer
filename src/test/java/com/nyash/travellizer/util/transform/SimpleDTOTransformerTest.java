@@ -1,5 +1,6 @@
 package com.nyash.travellizer.util.transform;
 
+import com.nyash.travellizer.common.infra.exception.flow.InvalidParameterException;
 import com.nyash.travellizer.common.model.transform.Transformable;
 import com.nyash.travellizer.common.model.transform.TransformableProvider;
 import com.nyash.travellizer.common.model.transform.Transformer;
@@ -43,6 +44,11 @@ public class SimpleDTOTransformerTest {
         assertEquals(source.text, destination.text);
         assertEquals(FRIDAY.name(), destination.day);
         assertEquals(source.id.toString(), destination.id);
+    }
+
+    @Test
+    void transform_NullCity_exception() {
+        assertThrows(InvalidParameterException.class, () -> transformer.transform(null, Destination.class));
     }
 
     public static class Source extends AbstractEntity {
