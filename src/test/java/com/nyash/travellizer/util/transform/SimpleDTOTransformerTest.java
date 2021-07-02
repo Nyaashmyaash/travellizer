@@ -38,6 +38,7 @@ public class SimpleDTOTransformerTest {
 
         Destination destination = transformer.transform(source, Destination.class);
         assertNotNull(destination);
+        assertEquals(source.value, destination.value);
     }
 
     public static class Source extends AbstractEntity {
