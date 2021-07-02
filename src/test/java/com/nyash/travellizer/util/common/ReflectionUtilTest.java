@@ -7,6 +7,7 @@ import com.nyash.travellizer.common.infra.util.annotations.Ignore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.lang.Nullable;
 
@@ -20,11 +21,12 @@ import java.util.List;
  */
 public class ReflectionUtilTest {
 
-//    @Test
-//    void createInstanceSuccess() {
-//        Object value = ReflectionUtil.createInstance(Source.class);
-//        assertNotNull(value);
-//    }
+    @Test
+    @Disabled
+    void createInstanceSuccess() {
+        Object value = ReflectionUtil.createInstance(Source.class);
+        assertNotNull(value);
+    }
 
     @Test
     void testCreateInstanceFailure() {

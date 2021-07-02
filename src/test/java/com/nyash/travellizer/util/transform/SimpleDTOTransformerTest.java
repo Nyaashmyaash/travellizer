@@ -14,8 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 public class SimpleDTOTransformerTest {
     private Transformer transformer;
 
-    @BeforeEach
-    public void setup() {
-        transformer = new SimpleDTOTransformer(new CachedFieldProvider(), new StubTransformableProvider());
-    }
+//    @BeforeEach
+//    public void setup() {
+//        transformer = new SimpleDTOTransformer(new CachedFieldProvider(), new StubTransformableProvider());
+//    }
 }
