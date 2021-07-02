@@ -13,6 +13,7 @@ import java.time.DayOfWeek;
 import java.util.Optional;
 import java.util.UUID;
 
+import static java.time.DayOfWeek.FRIDAY;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -33,12 +34,15 @@ public class SimpleDTOTransformerTest {
         Source source = new Source();
         source.value = 10;
         source.text = "ab";
-        source.day = DayOfWeek.FRIDAY;
+        source.day = FRIDAY;
         source.id = UUID.randomUUID();
 
         Destination destination = transformer.transform(source, Destination.class);
         assertNotNull(destination);
         assertEquals(source.value, destination.value);
+        assertEquals(source.text, destination.text);
+        assertEquals(FRIDAY.name(), destination.day);
+        assertEquals(source.id, destination.id);
     }
 
     public static class Source extends AbstractEntity {
