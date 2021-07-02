@@ -7,10 +7,13 @@ import com.nyash.travellizer.common.model.transform.impl.CachedFieldProvider;
 import com.nyash.travellizer.common.model.transform.impl.SimpleDTOTransformer;
 import com.nyash.travellizer.model.entity.base.AbstractEntity;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.time.DayOfWeek;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Verifies functionality of the {@link SimpleDTOTransformer} unit
@@ -23,6 +26,18 @@ public class SimpleDTOTransformerTest {
     @BeforeEach
     public void setup() {
         transformer = new SimpleDTOTransformer(new CachedFieldProvider(), new StubTransformableProvider());
+    }
+
+    @Test
+    void transform_fromSourceToDestination_success() {
+        Source source = new Source();
+        source.value = 10;
+        source.text = "ab";
+        source.day = DayOfWeek.FRIDAY;
+        source.id = UUID.randomUUID();
+
+        Destination destination = transformer.transform(source, Destination.class);
+        assertNotNull(destination);
     }
 
     public static class Source extends AbstractEntity {
