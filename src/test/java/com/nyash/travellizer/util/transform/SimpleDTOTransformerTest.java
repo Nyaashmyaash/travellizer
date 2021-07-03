@@ -51,6 +51,12 @@ public class SimpleDTOTransformerTest {
         assertThrows(InvalidParameterException.class, () -> transformer.transform(null, Destination.class));
     }
 
+    @Test
+    void testTransformNullDTOClassFailure() {
+        assertThrows(InvalidParameterException.class,
+                () -> transformer.transform(new Source(), (Class<Destination>) null));
+    }
+
     public static class Source extends AbstractEntity {
         int value;
 
