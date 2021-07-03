@@ -80,6 +80,12 @@ public class SimpleDTOTransformerTest {
         assertThrows(InvalidParameterException.class, () -> transformer.untransform(null, Source.class));
     }
 
+    @Test
+    void untransform_nullEntityClass_exception() {
+        assertThrows(InvalidParameterException.class,
+                () -> transformer.untransform(new Destination(), (Class<Source>) null));
+    }
+
     public static class Source extends AbstractEntity {
         int value;
 
