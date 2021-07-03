@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -55,6 +56,23 @@ public class SimpleDTOTransformerTest {
     void testTransformNullDTOClassFailure() {
         assertThrows(InvalidParameterException.class,
                 () -> transformer.transform(new Source(), (Class<Destination>) null));
+    }
+
+    @Test
+    void untransform_fromSourceToDestination_success() {
+        UUID id = UUID.randomUUID();
+        Destination destination = new Destination();
+        destination.value = 10;
+        destination.text = "ab";
+        destination.day = "MONDAY";
+        destination.id = id.toString();
+
+        Source source = transformer.untransform(destination, Source.class);
+        assertNotNull(source);
+        assertEquals(destination.value, source.value);
+        assertEquals(destination.text, source.text);
+        assertEquals(MONDAY, source.day);
+        assertEquals(id, source.id);
     }
 
     public static class Source extends AbstractEntity {
