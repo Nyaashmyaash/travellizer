@@ -86,6 +86,21 @@ public class SimpleDTOTransformerTest {
                 () -> transformer.untransform(new Destination(), (Class<Source>) null));
     }
 
+    @Test
+    void transform_useTransformableProvider_success() {
+        transformer = new SimpleDTOTransformer(new CachedFieldProvider(), new CustomTransformableProvider());
+
+        Source source = new Source();
+        source.value = 10;
+        source.text = "ab";
+
+        Destination destination = transformer.transform(source, Destination.class);
+        assertNotNull(destination);
+        assertEquals(source.value, destination.value);
+        assertEquals("changed", destination.text);
+
+    }
+
     public static class Source extends AbstractEntity {
         int value;
 
