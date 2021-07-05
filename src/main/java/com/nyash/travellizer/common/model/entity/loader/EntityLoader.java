@@ -1,4 +1,4 @@
-package com.nyash.travellizer.common.model.entity;
+package com.nyash.travellizer.common.model.entity.loader;
 
 import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 
