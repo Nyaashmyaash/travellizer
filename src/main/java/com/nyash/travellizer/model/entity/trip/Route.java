@@ -1,6 +1,6 @@
 package com.nyash.travellizer.model.entity.trip;
 
-import com.nyash.travellizer.model.entity.base.AbstractEntity;
+import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 import lombok.Setter;
 
 import java.time.LocalDateTime;

@@ -1,7 +1,7 @@
 package com.nyash.travellizer.model.entity.ticket;
 
 import com.nyash.travellizer.common.infra.exception.flow.ReservationException;
-import com.nyash.travellizer.model.entity.base.AbstractEntity;
+import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 import com.nyash.travellizer.model.entity.trip.Trip;
 import lombok.Setter;
 

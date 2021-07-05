@@ -2,7 +2,7 @@ package com.nyash.travellizer.model.entity.ticket;
 
 import com.nyash.travellizer.common.generator.text.StringGenerator;
 import com.nyash.travellizer.common.infra.util.Checks;
-import com.nyash.travellizer.model.entity.base.AbstractEntity;
+import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 import lombok.Setter;
 
 /**

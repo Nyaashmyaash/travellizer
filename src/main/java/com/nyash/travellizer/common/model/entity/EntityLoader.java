@@ -1,5 +1,7 @@
 package com.nyash.travellizer.common.model.entity;
 
+import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
+
 /**
  * Loads and returns entity by entity class and identifier
  * @author Nyash
@@ -14,6 +16,6 @@ public interface EntityLoader {
      * @param id
      * @return
      */
-    <T extends AdstractEntity> T load(Class<T> clz, int id);
+    <T extends AbstractEntity> T load(Class<T> clz, int id);
 
 }

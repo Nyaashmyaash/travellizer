@@ -6,7 +6,7 @@ import com.nyash.travellizer.common.model.transform.TransformableProvider;
 import com.nyash.travellizer.common.model.transform.Transformer;
 import com.nyash.travellizer.common.model.transform.impl.CachedFieldProvider;
 import com.nyash.travellizer.common.model.transform.impl.SimpleDTOTransformer;
-import com.nyash.travellizer.model.entity.base.AbstractEntity;
+import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
