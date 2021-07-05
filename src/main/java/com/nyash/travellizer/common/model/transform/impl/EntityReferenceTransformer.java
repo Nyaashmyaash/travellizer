@@ -1,6 +1,7 @@
 package com.nyash.travellizer.common.model.transform.impl;
 
 import com.nyash.travellizer.common.model.transform.Transformer;
+import org.hibernate.loader.entity.EntityLoader;
 
 /**
  * Transformer that is able to manage entity references when copying data
@@ -10,6 +11,8 @@ import com.nyash.travellizer.common.model.transform.Transformer;
  *
  */
 public class EntityReferenceTransformer implements Transformer {
+
+    private final EntityLoader
     @Override
     public <T, P> P transform(T entity, P dest) {
         return null;
