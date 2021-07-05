@@ -9,6 +9,7 @@ import com.nyash.travellizer.common.model.entity.base.AbstractEntity;
 import com.nyash.travellizer.common.model.transform.TransformableProvider;
 import com.nyash.travellizer.common.model.transform.Transformer;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,11 +39,11 @@ public class EntityReferenceTransformer implements Transformer {
     }
 
     @Override
-    public <T, P> P transform(T entity, P dest) {
+    public <T, P> P transform(final T entity, final P dest) {
         Class<T> clz = (Class<T>) entity.getClass();
         Map<String, String> mapping = transformableProvider.find(clz).map(t -> t.getSourceMapping()).orElse(Map.of());
 
-        for (Entry<String,String> entry : mapping.entrySet()) {
+        for (Entry<String, String> entry : mapping.entrySet()) {
             String name = entry.getKey();
             String domainProperty = entry.getValue();
             Object value = ReflectionUtil.getFieldValue(entity, domainProperty);
@@ -58,7 +59,23 @@ public class EntityReferenceTransformer implements Transformer {
     }
 
     @Override
-    public <T, P> T untransform(P dto, T entity) {
-        return null;
+    public <T, P> T untransform(final P dto, final T entity) {
+        Class<T> clz = (Class<T>) entity.getClass();
+        Map<String, String> mapping = transformableProvider.find(clz).map(t -> t.getSourceMapping()).orElse(Map.of());
+
+        for (Entry<String, String> entry : mapping.entrySet()) {
+            String name = entry.getKey();
+            String domainProperty = entry.getValue();
+
+            Field dstField = ReflectionUtil.getField(entity.getClass(), domainProperty);
+            int id = (int) ReflectionUtil.getFieldValue(dto, name);
+            if (id > 0) {
+                AbstractEntity value = entityLoader.load((Class) dstField.getType(), id);
+                ReflectionUtil.setFieldValue(entity, domainProperty, value);
+            }
+        }
+        delegate.untransform(dto, entity);
+
+        return entity;
     }
 }
